@@ -2,70 +2,81 @@
 
 **Prepared for:** OpusClip (requested by Parker Miller)
 **Author:** Derek Coleman
-**Date:** 2026-06-04
-**Method:** Deep-research workflow — 5 parallel search agents (open-source, MCP servers, Skills, Post-bridge, Zernio + market leaders), followed by adversarial verification of every numeric claim against the authenticated GitHub API. All GitHub star/fork counts below were re-verified via the GitHub API on **2026-06-04**.
+**Date:** 2026-06-05
+**Method:** Deep-research workflow — parallel search agents (open-source, MCP servers, Skills, Post-bridge, Zernio, market leaders, + a second pass on directory presence, documentation depth, and star drivers), with adversarial verification of every numeric claim against the authenticated **GitHub API (2026-06-04/05)**.
 
 ---
 
 ## TL;DR
 
-- **There is no well-adopted, dedicated "social-scheduling Skill" yet.** The distributable Skill (SKILL.md) format only matured in late 2025, and the category is a green field. The few skills that actually *post* are thin wrappers (single-digit to ~270 stars), and there is **no official Anthropic** social-posting skill.
-- **MCP for social posting is becoming table-stakes, not a moat.** Incumbents are shipping it: **Buffer** (official hosted MCP, Feb 2026 beta), **Postiz** (built-in MCP endpoint, open-source, 31k★), **post-bridge** (hosted MCP), **Zernio** (hosted MCP, 314 tools). Adoption of standalone community posting-MCPs is shallow — almost all sit at 0–20 stars; the best-verified registry signal was ~297 Smithery installs.
-- **Open source is dominated by one project: Postiz** — 31,462★, ~10× the #2 (Mixpost, 3,307★), and it has the most aggressive AI-agent story (official MCP + official `postiz-agent` Claude/OpenClaw skill).
-- **Closed-source AI-native challengers:** **Zernio** (zernio.com, formerly "Late," ~$1M ARR self-reported) and **Post-bridge** (post-bridge.com, **Stripe-verified ~$40k/30-days ≈ $450–500k ARR run-rate**). Both are bootstrapped, solo/small-team, API-first, and lead the field on agent integrations. Note this **corroborates the low end** of the prior Post-bridge estimate ($500k–$1M).
-- **Market scale for context:** Sprout Social ~$406M revenue (audited), Hootsuite >$350M, Buffer $31M (2024), Later 7–8M users. The AI-agent wedge (Zernio/Post-bridge) is niche-but-fast-growing relative to these.
+- **No well-adopted, dedicated "social-scheduling Skill" exists yet.** The SKILL.md format only matured in late 2025; the category is a green field. Skills that actually *post* are thin wrappers (single-digit to ~270★), and there is **no official Anthropic** social-posting skill.
+- **MCP for posting is becoming table-stakes, not a moat.** [Buffer](https://developers.buffer.com) (official hosted MCP), [Postiz](https://github.com/gitroomhq/postiz-app) (built-in MCP, 31k★), [Post-bridge](https://post-bridge.com/mcp), and [Zernio](https://zernio.com) all ship one. Standalone community posting-MCPs are shallow (mostly 0–20★).
+- **Open source = Postiz dominates** — 31,462★, ~10× #2 [Mixpost](https://github.com/inovector/mixpost) (3,307★) — but that lead is a *distribution* outcome (see §3.1), not a feature gap.
+- **Closed-source AI-native challengers:** **Zernio** (~$1M ARR self-reported) and **Post-bridge** (**Stripe-verified ~$40k/30-days ≈ $450–500k ARR**, corroborating the *low end* of the prior $500k–$1M estimate). Both bootstrapped, API-first, leading on agent integrations.
+- **Market scale for context:** Sprout Social ~$406M revenue (audited), Hootsuite >$350M, Buffer $31M, Later 7–8M users.
 
 ---
 
 ## 1. The "Skills" landscape (Claude / Agent Skills)
 
-The distributable Skill (`SKILL.md`) format is new (late 2025). A real market of *social-scheduling* Skills does **not** yet exist. What's out there:
+A real market of *social-scheduling* Skills does **not** yet exist. What's out there:
 
-| Skill / Repo | What it does | Stars | Source / License |
+| Skill / Repo | What it does | Stars | License |
 |---|---|---|---|
-| `gitroomhq/postiz-agent` | Official Postiz agent skill — schedule across 27+ platforms via Claude/OpenClaw | **270** | Postiz (open) |
-| `Xquik-dev/tweetclaw` | X/Twitter only — post, search, DMs, giveaways (OpenClaw plugin) | **71** | MIT |
-| `Upload-Post/upload-post-larry-marketing-skill` | TikTok/IG slideshow marketing skill (Upload-Post API) | **24** | open |
-| `Upload-Post/upload-post-skill` | Post/schedule to 10+ platforms via Upload-Post API (the de-facto reference skill) | **20** | MIT |
-| `guyaga/claude-code-social-media-skill` | ~11 platforms, Upload-Post API wrapper | **1** | MIT |
-| `Upload-Post/upload-post-skills` | 5 bundled Anthropic Agent Skills, MCP companion | **0** | open |
+| [gitroomhq/postiz-agent](https://github.com/gitroomhq/postiz-agent) | Schedule across 27+ platforms via Claude/OpenClaw | **270** | open |
+| [Xquik-dev/tweetclaw](https://github.com/Xquik-dev/tweetclaw) | X only — post, search, DMs, giveaways | **71** | MIT |
+| [Upload-Post/…-larry-marketing-skill](https://github.com/Upload-Post/upload-post-larry-marketing-skill) | TikTok/IG slideshow marketing (Upload-Post API) | **24** | open |
+| [Upload-Post/upload-post-skill](https://github.com/Upload-Post/upload-post-skill) | Post/schedule to 10+ platforms (reference skill) | **20** | MIT |
+| [guyaga/claude-code-social-media-skill](https://github.com/guyaga/claude-code-social-media-skill) | ~11 platforms, Upload-Post wrapper | **1** | MIT |
+| [Upload-Post/upload-post-skills](https://github.com/Upload-Post/upload-post-skills) | 5 bundled Agent Skills, MCP companion | **0** | open |
 
-**Important distinctions:**
-- **No official Anthropic social-scheduling skill.** `anthropics/skills` (146,520★) ships document/design/dev skills only — none post or schedule. (`canvas-design` makes social *graphics* but doesn't publish.)
-- The big star counts in this space belong to **lists and content-writing skills, not posting skills:**
-  - `ComposioHQ/awesome-claude-skills` — **63,247★** (a curated list)
-  - `coreyhaines31/marketingskills` — **31,919★** (CRO/copywriting/SEO; its `social` skill writes/plans copy, it does not post)
-- The genuinely-posting subset is ~4–6 thin repos, most wrapping the **same Upload-Post API**. Highest is `postiz-agent` (270) — and that's a vendor's own skill, not a neutral community winner.
-- **No platform currently exposes per-skill install counts** (skills.sh, etc.), so adoption can only be proxied by stars today.
+- **No official Anthropic social-scheduling skill.** [anthropics/skills](https://github.com/anthropics/skills) (146,520★) ships document/design/dev skills only — none post (`canvas-design` makes *graphics*, doesn't publish).
+- **The big star counts here are lists/copywriting, not posters:** [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) (**63,247★**, a list); [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) (**31,919★**, its `social` skill writes copy, doesn't post).
+- The genuinely-posting subset is ~4–6 thin repos, most wrapping the **same Upload-Post API**. Highest (`postiz-agent`, 270) is a vendor's own skill.
+- **No platform exposes per-skill install counts** (skills.sh etc.), so stars are the only adoption proxy today.
 
-**Adjacent — ChatGPT:** Real scheduling on ChatGPT lives in the new **Apps SDK / MCP** channel (app submissions opened 2025-12-17), via incumbents like **SocialPilot AI Scheduler** and **Glowtify** — not in GPT-Store "scheduler GPTs," which are content planners with no published usage numbers.
-
-**Implication:** "Social scheduling as a Skill" is effectively unclaimed — a first-mover/branded opportunity, but also unproven demand this early.
+**Adjacent — ChatGPT:** real scheduling lives in the new Apps SDK/MCP channel (submissions opened 2025-12-17) via incumbents (SocialPilot AI Scheduler, Glowtify) — not GPT-Store "scheduler GPTs," which are content planners. **Implication:** social scheduling *as a Skill* is unclaimed — first-mover opportunity, but unproven demand this early.
 
 ---
 
 ## 2. The MCP-server landscape (social posting/scheduling)
 
-Three tiers emerge.
-
-### Tier 1 — Vendor / official MCP (the real distribution)
+### Tier 1 — Vendor / official MCP
 | Vendor | MCP offering | Open/Closed | Companion repo ★ |
 |---|---|---|---|
-| **Buffer** | Official hosted MCP (`mcp.buffer.com`), public beta ~Feb 2026; create posts, browse queue | Closed (hosted) | — |
-| **Postiz** | Built-in MCP endpoint in the open-source app (`/api/mcp/{key}`) + hosted `postiz.com/mcp` | Open (AGPL/Apache) | app: **31,462** |
-| **Post-bridge** | One-click hosted MCP (`post-bridge.com/mcp`), "11 tools," 9 platforms; on Starter $9/mo | Closed (hosted) | `agent-mode`: **12** |
-| **Zernio** | Hosted MCP server (314 tools), 15+ platforms | Closed (hosted) | `zernio-claude-plugin`: 0 |
-| **Ayrshare** | Official MCP is **docs-only** (not live posting); posting is via community wrappers | API closed | community: 0–2 |
+| **Buffer** | Official hosted MCP ([developers.buffer.com](https://developers.buffer.com)), beta ~Feb 2026 | Closed (hosted) | community wrappers only |
+| **Postiz** | Built-in MCP endpoint (`/api/mcp/{key}`) + hosted `postiz.com/mcp` | Open (AGPL) | [postiz-app](https://github.com/gitroomhq/postiz-app): **31,462** |
+| **Post-bridge** | One-click hosted MCP, "11 tools," 9 platforms | Closed (hosted) | [agent-mode](https://github.com/post-bridge-hq/agent-mode): **12** |
+| **Zernio** | Hosted MCP (~300 tools, auto-gen from OpenAPI), 15 platforms | Closed (hosted) | [zernio-dev/*](https://github.com/zernio-dev) |
+| **Ayrshare** | Official MCP is **docs-only** (not live posting) | API closed | community: 0–2 |
 
-### Tier 2 — Community MCPs with real traction (note: read vs. post)
-- `stickerdaniel/linkedin-mcp-server` — **2,126★** — but **read/scrape only**, not publishing. (Most-starred single-platform social MCP.)
-- `EnesCinr/twitter-mcp` — **397★** — **posts** tweets + search. The most-starred Twitter *posting* MCP.
-- `@xonack/apex-mcp` (X management, hosted on Smithery) — **~297 Smithery installs** (the only registry usage number that could be verified).
+### Tier 2 — Community MCPs with traction (note read vs. post)
+- [stickerdaniel/linkedin-mcp-server](https://github.com/stickerdaniel/linkedin-mcp-server) — **2,126★** — **read/scrape only**, not publishing (most-starred single-platform social MCP).
+- [EnesCinr/twitter-mcp](https://github.com/EnesCinr/twitter-mcp) — **397★** — **posts** tweets + search (top Twitter posting MCP).
+- `@xonack/apex-mcp` (X mgmt, Smithery) — **~297 Smithery installs** (only registry usage number verified).
+- Tier 3: dozens of single-author vendor wrappers, almost all **0–3★**.
 
-### Tier 3 — The long tail
-Dozens of single-author wrappers for each vendor (Buffer, Postiz, Typefully, Bluesky, post-bridge, Metricool, etc.) almost all at **0–3 stars**.
+### 2.1 Where these MCPs are actually listed (directory & connector presence)
+✓ = listing confirmed via search; **install/usage counts behind these directories were not machine-retrievable (pages 403)**. Obs. 2026-06-05.
 
-**Takeaways:** (1) Posting via MCP is becoming a checkbox feature for schedulers, not a differentiator. (2) Outside Postiz-the-app and the LinkedIn *scraper*, no social-*posting* MCP has breakout adoption — the space is fragmented and nascent. (3) `npm` download counts and most registry install counts could not be retrieved from this environment (network-blocked) — a follow-up pass from an unrestricted network is recommended to fill those in.
+| Tool | mcp.so | Glama | Smithery | PulseMCP | Cursor dir | Docker MCP Catalog |
+|---|---|---|---|---|---|---|
+| Postiz | ✓ | ✓ | ? | ✓ | ✓ | ? |
+| Zernio | ? | ✓ | ? | ? | ? | ? |
+| Post-bridge | – | – | – | – | – | – |
+| Buffer | ? | ? | ? | ✓ (community) | ? | ? |
+| Ayrshare | ? | ✓ (unofficial) | ? | ? | ? | ? |
+| twitter-mcp (EnesCinr) | ? | ✓ | ✓ | ✓ | ? | ✓ |
+| linkedin-mcp (stickerdaniel) | ? | ✓ | ✓ | ? | ? | ✓ |
+| Typefully (community) | ? | ? | ? | ? | ✓ | ? |
+| Upload-Post | ? | ? | ? | ? | ? | ? |
+
+**Key directory findings:**
+- **Nothing was confirmed in the Official MCP Registry (registry.modelcontextprotocol.io) or GitHub's MCP catalog/Copilot list** — searches returned only the registry homepages, no social-tool hits.
+- **"Listed as a Claude/ChatGPT connector" is mostly vendor-claimed compatibility, not curated-catalog inclusion.** Post-bridge, Zernio, and Upload-Post advertise one-click/custom connectors for Claude + ChatGPT; these are *self-add custom MCP connectors*, not entries in Anthropic's or OpenAI's curated directories.
+- **Only the two utility/scraper servers (LinkedIn, Twitter) are in the Docker MCP Catalog** — the SaaS schedulers are not.
+- **"Buffer official MCP" is a near-misnomer in directories:** Buffer's *own* hosted MCP lives at developers.buffer.com, but the directory-listed Buffer MCPs are community-built (e.g. `ahernan2` on PulseMCP/LobeHub).
+- **Postiz is the only scheduler with broad third-party directory presence** (mcp.so, Glama, PulseMCP, Cursor) — again a distribution, not capability, signal.
 
 ---
 
@@ -73,85 +84,98 @@ Dozens of single-author wrappers for each vendor (Buffer, Postiz, Typefully, Blu
 
 | Tool | Repo | Stars | Forks | License | MCP/Skill? |
 |---|---|---|---|---|---|
-| **Postiz** | `gitroomhq/postiz-app` | **31,462** | 5,811 | AGPL-3.0 | ✅ Official MCP + official skill (`postiz-agent`, 270★) |
-| **Mixpost** | `inovector/mixpost` | **3,307** | 494 | MIT | Community MCP only |
-| **Socioboard 5.0** | `socioboard/Socioboard-5.0` | **1,457** | 407 | open | None |
+| **Postiz** | [gitroomhq/postiz-app](https://github.com/gitroomhq/postiz-app) | **31,462** | 5,811 | AGPL-3.0 | ✅ Official MCP + skill ([postiz-agent](https://github.com/gitroomhq/postiz-agent), 270★) |
+| **Mixpost** | [inovector/mixpost](https://github.com/inovector/mixpost) | **3,307** | 494 | MIT | Community MCP only |
+| **Socioboard 5.0** | [socioboard/Socioboard-5.0](https://github.com/socioboard/Socioboard-5.0) | **1,457** | 407 | open | None |
 
-- **Postiz** is the clear category leader on every metric (~10× Mixpost), actively developed (pushed 2026-06-04, 195 releases), 28–30+ platforms. README self-reports "~3M Docker downloads" (unverifiable — ghcr.io exposes no public counter). It is explicitly courting the Claude/agentic workflow — the most relevant OSS player for OpusClip's AI angle.
-- **Mixpost** is the credible #2: MIT, self-host only, one-time licensing (free Lite / $299 Pro / $1,199 Enterprise). **200,424 verified Docker Hub pulls** (`inovector/mixpost`). Slower cadence (last push 2026-03-16); MCP is community-built only.
-- **Socioboard** is legacy/fading (flagship since 2014; newest 6.0 repo has ~1 star). **Publer** and **Fedica** are proprietary, not OSS.
+- **Mixpost** (credible #2): MIT, self-host only, one-time licensing (free Lite / $299 Pro / $1,199 Enterprise), **200,424 verified Docker Hub pulls**, slower cadence, community-only MCP. **Socioboard** is legacy/fading (since 2014). Publer and Fedica are proprietary.
+
+### 3.1 Why Postiz has 31k stars (the question behind the question)
+The lead is **a distribution outcome, not a product-quality signal** — a feature-comparable competitor (Mixpost) sits ~10× lower. Strongest verified causes first:
+
+1. **The founder is a professional open-source-growth marketer.** Nevo David (runs [Gitroom](https://github.com/nevo-david), formerly "GitHub20k") previously grew **Novu from 2k → 20k+ stars in ~1 year** using DEV/Reddit/HN to hit GitHub Trending. Postiz is the flagship demo of that playbook — its competitors are built by engineers, not distribution experts.
+2. **Built-in-public launch that hit GitHub Trending** (open-sourced 2024-09-01, on Trending by 09-02), amplified by viral "I open-sourced a scheduler and it blew up" dev.to posts; a second Trending spike ~Dec 2024.
+3. **Serial #1 Product Hunt launches** — launched 3×, each finishing #1 of day/week/month (v2 alone: 698 upvotes); every relaunch (MCP, auto-posters) drives a fresh star wave.
+4. **Aggregator inclusion** — listed in [awesome-selfhosted](https://github.com/awesome-selfhosted/awesome-selfhosted) (Buffer/Hootsuite alternative) and submitted by the founder to [punkpeye/awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers) — capturing both the self-hosting and the AI-agent discovery waves.
+5. **Dual-hype positioning** — "the ultimate *agentic* social media scheduling tool," self-hosted Buffer alternative **+** MCP/agent angle, AGPL open-core (free self-host parity converts viewers into stargazers). Bootstrapped, **not** VC/YC-backed; public MRR milestones ($14k→$60k→$88k) double as marketing.
 
 ---
 
 ## 4. Closed-source AI-native challengers (the named competitors)
 
-### Post-bridge (post-bridge.com)
-- **What:** Low-cost, creator-focused cross-poster/scheduler, ~9 platforms. Founder **Jack Friks** (build-in-public indie hacker). Launched ~Oct 2024. Closed-source SaaS.
-- **Adoption:** ~1,560 active users, ~1.1M posts published (both self-reported homepage stats).
-- **Revenue:** **Stripe-verified ~$39.7k in trailing 30 days** via TrustMRR (data ts 2026-05-04) ⇒ **~$450–500k ARR run-rate** (high confidence; third-party, payment-verified). Self-reported MRR figures range $11k–$19k/mo across older build-in-public posts. → **Refines the prior $500k–$1M estimate down toward the low end (~$450–500k).**
-- **AI-agent posture (strong for its size):** official API, official **hosted MCP** (`/mcp`), and an official agent skill **`post-bridge-hq/agent-mode` (12★)**.
-- **Pricing:** Creator $29/mo, Pro $49/mo (legacy lower tiers existed); API is a paid add-on.
+### Post-bridge ([post-bridge.com](https://post-bridge.com))
+- **What:** low-cost, creator-focused cross-poster, ~9 platforms. Founder **Jack Friks** (build-in-public). Launched ~Oct 2024.
+- **Adoption:** ~1,560 active users, ~1.1M posts (self-reported). **Revenue: Stripe-verified ~$39.7k/30-days** (TrustMRR, ts 2026-05-04) ⇒ **~$450–500k ARR** (high confidence). → refines prior $500k–$1M estimate toward the low end.
+- **AI-agent posture (strong for its size):** official API, hosted MCP, official skill ([agent-mode](https://github.com/post-bridge-hq/agent-mode), 12★), Claude Code plugin, Cursor rules.
+- **Docs: Extensive** — Scalar interactive API reference + help center. **Pricing:** Creator $29 / Pro $49; API a paid add-on (+$5/mo).
 
-### Zernio (zernio.com) — *the "Zernio" in the brief; correct spelling confirmed*
-- **What:** **API-first** social platform (formerly named **"Late"**), founder **Miquel Palet**. A single REST API to publish/schedule/inbox/analytics/ads across 14–15 platforms. Explicitly targets **developers, agencies, and AI agents**. Closest direct competitor: **Ayrshare** (Zernio even ships a drop-in Ayrshare-SDK replacement).
-- **Revenue:** **~$1M ARR in <9–10 months** — self-reported by founder (LinkedIn / ARR Club / Indie Hackers), bootstrapped. Medium confidence (no audited figure). No hard public user/customer count.
-- **AI-agent posture (the most aggressive in the whole set):** hosted **MCP server (314 tools)**, official **Claude Code skill** (`zernio-api`), **Claude Code plugin**, **Cursor plugin**, **n8n** community node, plus SDKs in 8+ languages.
-- **GitHub (org `zernio-dev`, 22 repos, verified 2026-06-04):** `zernflow` 46★, `latewiz` 39★, `zernio-node` 25★, `zernio-cli` 15★, `crisp-mcp` 12★, `zernio-api` (Claude skill) 5★, `n8n-nodes-zernio` 5★. Real but early adoption.
-- **Pricing:** per-connected-account tiers (~$6/$3/$1), first 2 accounts free. Product Hunt Ads-API launch: ~175 upvotes, #6 Product of the Day (Apr 2026).
+### Zernio ([zernio.com](https://zernio.com)) — *the "Zernio" in the brief; spelling confirmed (formerly "Late")*
+- **What:** **API-first** social platform, founder **Miquel Palet**. One REST API for publish/schedule/inbox/analytics/ads across 14–15 platforms; targets developers, agencies, and AI agents. Closest competitor **Ayrshare** (Zernio ships a drop-in Ayrshare-SDK replacement).
+- **Revenue: ~$1M ARR in <10 months** — self-reported (founder/ARR Club/Indie Hackers), bootstrapped. Medium confidence; no hard user count.
+- **AI-agent posture (most aggressive in the set):** hosted MCP (~300 tools), Claude Code skill ([zernio-api](https://github.com/zernio-dev/zernio-api), 5★), Claude plugin, Cursor plugin, n8n node, **SDKs in 8 languages** (Node/Py/Go/Ruby/Java/PHP/.NET/Rust).
+- **Docs: Extensive** — OpenAPI-driven docs site, broadest SDK breadth in the field. **GitHub** ([zernio-dev](https://github.com/zernio-dev), 22 repos): [zernflow](https://github.com/zernio-dev/zernflow) 46★, [latewiz](https://github.com/zernio-dev/latewiz) 39★, zernio-node 25★, zernio-cli 15★, crisp-mcp 12★. Real but early.
+- **Pricing:** per-account tiers (~$6/$3/$1), first 2 free. Product Hunt Ads-API launch: ~175 upvotes, #6 of day (Apr 2026).
+
+### Documentation depth across the field
+| Tool | Depth | Signal |
+|---|---|---|
+| Post-bridge / Zernio | Extensive | Interactive ref (Scalar) / OpenAPI + 8 SDKs; both strongest on explicit agent/MCP setup docs |
+| [Ayrshare](https://www.ayrshare.com/docs/introduction) | Extensive | Mature REST + Postman; Node/Python SDKs; 13 networks |
+| Postiz | Extensive | Mintlify docs + NodeJS SDK; Public API flagged **Beta** |
+| Buffer | Extensive | **GraphQL** API, **no SDK**; maintained changelog/migrations |
+| Upload-Post | Extensive | Quickstart + Python/JS SDKs; 10–11 platforms |
+| Mixpost / Typefully | Moderate | Self-host/REST docs, **no first-party SDK or MCP** (Typefully: 5 platforms, has playground) |
 
 ---
 
 ## 5. Market scale (context — mainstream leaders)
 
-| Company | Scale | API | Native MCP / agent | Confidence |
+| Company | Scale | API | Native MCP/agent | Confidence |
 |---|---|---|---|---|
-| **Sprout Social** (public) | ~30k customers; **$405.9M rev FY2024** (+22%) | ✅ | No (in-app AI; MCP via bridges) | High (SEC) |
-| **Hootsuite** | "25M+" cumulative users (marketing); **>$350M rev 2024** | ✅ | No native | Low–Med |
-| **Buffer** | ~70k paying customers / ~140k active; **$31.1M rev 2024** | ✅ | ✅ Official MCP | Med |
-| **Later** | ~7–8M users; acquired Mavely $250M | ✅ (limited) | No native | Med |
+| **Sprout Social** (public) | ~30k customers; **$405.9M rev FY24** (+22%) | ✅ | No (MCP via bridges) | High (SEC) |
+| **Hootsuite** | "25M+" cumulative (marketing); **>$350M rev** | ✅ | No native | Low–Med |
+| **Buffer** | ~70k paying / ~140k active; **$31.1M rev 24** | ✅ | ✅ Official MCP | Med |
+| **Later** | ~7–8M users; acquired Mavely $250M | ✅ (ltd) | No native | Med |
 | **SocialBee** | ~$5.5M rev 2025 | ✅ | No native | Med (Latka) |
-| **Ayrshare** (API-first) | "thousands of businesses, millions of posts" | ✅ (core product) | API-first, agent-friendly | Low–Med |
+| **Ayrshare** (API-first) | "thousands of businesses, millions of posts" | ✅ (core) | API-first | Low–Med |
 | **Publer / Metricool / Typefully / Hypefury** | mostly proprietary; few hard numbers (Typefully "130k+ creators") | varies | No native | Low |
 
-**Read:** Only **Buffer** among GUI incumbents ships a native MCP. Sprout/Hootsuite/Later are reachable only via third-party MCP bridges. That gap is exactly the whitespace the API-first challengers (Zernio, Post-bridge, Ayrshare) are targeting.
+**Read:** only **Buffer** among GUI incumbents ships a native MCP; Sprout/Hootsuite/Later are reachable only via third-party bridges. That gap is the whitespace the API-first challengers (Zernio, Post-bridge, Ayrshare) target.
 
 ---
 
 ## 6. Adoption ranking (verified GitHub stars, 2026-06-04)
 
-Across everything that actually relates to *posting/scheduling* via agents/code:
+1. [postiz-app](https://github.com/gitroomhq/postiz-app) — **31,462** (OSS leader)
+2. [mixpost](https://github.com/inovector/mixpost) — **3,307** (OSS #2; 200k+ Docker pulls)
+3. [linkedin-mcp-server](https://github.com/stickerdaniel/linkedin-mcp-server) — **2,126** (read/scrape, not posting)
+4. [Socioboard-5.0](https://github.com/socioboard/Socioboard-5.0) — **1,457** (legacy)
+5. [twitter-mcp](https://github.com/EnesCinr/twitter-mcp) — **397** (top Twitter posting MCP)
+6. [postiz-agent](https://github.com/gitroomhq/postiz-agent) — **270** (top posting *Skill*)
+7. [tweetclaw](https://github.com/Xquik-dev/tweetclaw) — **71** (X-only skill)
+8. [zernio-dev/zernflow](https://github.com/zernio-dev/zernflow) — **46** (Zernio's most-starred repo)
+9. [upload-post-skill](https://github.com/Upload-Post/upload-post-skill) — **20**
+10. [post-bridge-hq/agent-mode](https://github.com/post-bridge-hq/agent-mode) — **12**
 
-1. `gitroomhq/postiz-app` — **31,462** (full app; OSS leader)
-2. `inovector/mixpost` — **3,307** (OSS #2; 200k+ Docker pulls)
-3. `stickerdaniel/linkedin-mcp-server` — **2,126** (read/scrape, not posting)
-4. `socioboard/Socioboard-5.0` — **1,457** (legacy)
-5. `EnesCinr/twitter-mcp` — **397** (top Twitter posting MCP)
-6. `gitroomhq/postiz-agent` — **270** (top posting *Skill*)
-7. `Xquik-dev/tweetclaw` — **71** (X-only skill)
-8. `zernio-dev/zernflow` — **46** (Zernio's most-starred repo)
-9. `Upload-Post/upload-post-skill` — **20** (reference posting skill)
-10. `post-bridge-hq/agent-mode` — **12** (Post-bridge official skill)
-
-*(Context-only, not posting tools: `anthropics/skills` 146,520★, `awesome-claude-skills` 63,247★, `marketingskills` 31,919★.)*
+*(Context-only, not posters: anthropics/skills 146,520★, awesome-claude-skills 63,247★, marketingskills 31,919★.)*
 
 ---
 
 ## 7. What this means for OpusClip
 
-1. **The Skill channel is wide open.** No dominant, official, or branded social-scheduling Skill exists. A polished, branded OpusClip "post my clips" Skill could plausibly become the category reference — but demand for *distributed Skills specifically* is unproven this early (best posting skill = 270★).
-2. **MCP is quickly becoming table-stakes.** Buffer, Postiz, Post-bridge, and Zernio all already ship one. To be agent-native, OpusClip likely needs an MCP/Skill that lets an agent push a finished clip to the schedulers — or partner with the API-first players (Zernio/Ayrshare/Post-bridge) that already solve multi-platform posting.
-3. **The most direct "AI-native scheduling" competitors are Zernio (~$1M ARR) and Post-bridge (~$450–500k ARR).** Both are small, bootstrapped, and winning on developer/agent ergonomics rather than scale. Their GitHub traction is real but early (tens of stars), meaning the agent-distribution race is genuinely up for grabs.
+1. **The Skill channel is wide open** — no dominant/official/branded social-scheduling Skill exists (best poster = 270★), and no skill registry yet exposes installs. First-mover/branded opportunity, but distributed-Skill demand is unproven.
+2. **MCP is fast becoming table-stakes** — Buffer, Postiz, Post-bridge, Zernio all ship one. To be agent-native, OpusClip likely needs an MCP/Skill that pushes a finished clip to schedulers, or partners with the API-first players (Zernio/Ayrshare/Post-bridge) that already solve multi-platform posting.
+3. **Distribution beats features in this category.** Postiz's 31k stars came from a deliberate growth playbook (founder reach + Trending + Product Hunt + awesome-lists), not superior product — a directly replicable lesson for however OpusClip launches its own skill/MCP.
+4. **The direct AI-native competitors are Zernio (~$1M ARR) and Post-bridge (~$450–500k ARR)** — small, bootstrapped, winning on developer/agent ergonomics; GitHub traction still early (tens of stars), so the agent-distribution race is genuinely open.
 
 ---
 
 ## Confidence & data-quality notes
 
-- **High confidence (verified):** all GitHub star/fork counts (GitHub API, 2026-06-04); Mixpost Docker pulls (Docker Hub API, 200,424); Sprout Social revenue (SEC); Post-bridge 30-day Stripe revenue (TrustMRR, third-party payment-verified).
-- **Medium / self-reported:** Zernio ARR (founder), Post-bridge user/post counts and self-reported MRR, vendor pricing, Hootsuite "25M users" (cumulative marketing claim), Buffer revenue (transparency report).
-- **Not retrievable in this environment (network-blocked → "not found"):** npm weekly download counts; most Smithery/Glama/PulseMCP install counts; some official pricing pages (403). Recommend a follow-up pass from an unrestricted network to fill download/install figures.
-- **Naming:** "Zernio" in the brief is correct (website zernio.com; formerly "Late"). It is not "Zenno/Zeno."
-
----
+- **High (verified):** all GitHub star/fork counts (GitHub API); Mixpost Docker pulls (200,424); Sprout revenue (SEC); Post-bridge 30-day Stripe revenue (TrustMRR).
+- **Medium / self-reported:** Zernio ARR, Post-bridge user/post counts & self-reported MRR, vendor pricing, Hootsuite "25M" (cumulative), Buffer revenue (transparency report), Postiz star-driver dates (star-history.com 403'd; trajectory inferred from documented Trending/PH spikes).
+- **Not machine-retrievable (network-blocked → ?):** npm download counts; Smithery/Glama/PulseMCP install/usage counts; some vendor docs/pricing pages (403). Directory **presence** confirmed via search; directory **counts** need a browser/API pass.
+- **Naming:** "Zernio" in the brief is correct (zernio.com; formerly "Late"), not "Zenno/Zeno."
 
 ### Key sources
-GitHub API (all star/fork counts, 2026-06-04) · Docker Hub API (Mixpost pulls) · trustmrr.com/startup/post-bridge · post-bridge.com/mcp · developers.buffer.com/guides/integrations/mcp.html · github.com/gitroomhq/postiz-app · github.com/zernio-dev · zernio.com · investors.sproutsocial.com (Q4 2024) · electroiq.com (Buffer/Hootsuite stats) · later.com/about · getlatka.com/companies/socialbee.com · ayrshare.com · techcrunch.com (ChatGPT app store, 2025-12-18) · github.com/anthropics/skills · github.com/Upload-Post/upload-post-skill
+GitHub API & Docker Hub API (counts) · trustmrr.com/startup/post-bridge · developers.buffer.com · docs.postiz.com · docs.zernio.com · api.post-bridge.com/reference · ayrshare.com/docs · dev.to/crowddotdev (Nevo David / 20k-stars playbook) · github.com/awesome-selfhosted · github.com/punkpeye/awesome-mcp-servers · mcp.so · glama.ai/mcp · pulsemcp.com · cursor.directory · investors.sproutsocial.com (Q4 2024) · techcrunch.com (ChatGPT app store, 2025-12-18)
