@@ -175,7 +175,7 @@ The lead is **a distribution outcome, not a product-quality signal** — a featu
 9. [upload-post-skill](https://github.com/Upload-Post/upload-post-skill) — **20**
 10. [post-bridge-hq/agent-mode](https://github.com/post-bridge-hq/agent-mode) — **12**
 
-*(Context-only, not posters: anthropics/skills 146,520★, awesome-claude-skills 63,247★, marketingskills 31,919★.)*
+*(Context-only, not posters: [anthropics/skills](https://github.com/anthropics/skills) 146,520★, [awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) 63,247★, [marketingskills](https://github.com/coreyhaines31/marketingskills) 31,919★ — and **none of the six social-posting skills appear in any of these three**: anthropics/skills is a first-party sample repo, marketingskills is Corey Haines's own copy/SEO skill set, and Composio's list carries only generic "Automation" category entries.)*
 
 ---
 
