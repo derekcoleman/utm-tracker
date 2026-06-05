@@ -185,6 +185,7 @@ The lead is **a distribution outcome, not a product-quality signal** — a featu
 2. **MCP is fast becoming table-stakes** — Buffer, Postiz, Post-bridge, Zernio all ship one. To be agent-native, OpusClip likely needs an MCP/Skill that pushes a finished clip to schedulers, or partners with the API-first players (Zernio/Ayrshare/Post-bridge) that already solve multi-platform posting.
 3. **Distribution beats features in this category.** Postiz's 31k stars came from a deliberate growth playbook (founder reach + Trending + Product Hunt + awesome-lists), not superior product — a directly replicable lesson for however OpusClip launches its own skill/MCP.
 4. **The direct AI-native competitors are Zernio (~$1M ARR) and Post-bridge (~$450–500k ARR)** — small, bootstrapped, winning on developer/agent ergonomics; GitHub traction still early (tens of stars), so the agent-distribution race is genuinely open.
+5. **Yes, it's still an early/green field — but the real play is getting natively listed in the official directories (GitHub's MCP registry and the Claude connector marketplace), where today *nobody* in this category is.** That's the durable distribution moat, more than any single skill/MCP repo.
 
 ---
 
