@@ -35,6 +35,24 @@ A real market of *social-scheduling* Skills does **not** yet exist. What's out t
 - The genuinely-posting subset is ~4–6 thin repos, most wrapping the **same Upload-Post API**. Highest (`postiz-agent`, 270) is a vendor's own skill.
 - **No platform exposes per-skill install counts** (skills.sh etc.), so stars are the only adoption proxy today.
 
+### 1.1 Where these Skills are listed (skills directories — distinct from the MCP registries above)
+
+The Skills-directory ecosystem is young and **GitHub-centric**, splitting into (a) **auto-scrapers** that index every public `SKILL.md` (so "listed" ≈ "exists on GitHub") — [SkillsMP](https://skillsmp.com) (~1.5M scraped), [agent-skills.cc](https://agent-skills.cc) (63k+), [SkillHub](https://skillhub.club), [Claude Marketplaces](https://claudemarketplaces.com), [AgentSkill.sh](https://agentskill.sh); (b) **curated/editorial** lists — [ClaudeSkills.info](https://claudeskills.info) (~650), the security-vetted [Skills Directory](https://skillsdirectory.com), [Agensi](https://agensi.io), and the GitHub **awesome-lists** that are the real discovery layer. [skills.sh](https://skills.sh) is the common installer (`npx skills add owner/repo`); [Smithery](https://smithery.ai/skills) and [Glama](https://glama.ai) are MCP-first with only thin skills sections. There is **no authoritative skills registry and no install/usage counts** — these skills compete on GitHub discoverability + a few curated lists.
+
+✓ = listed · ✗ = confirmed absent · ~✓ = auto-scraped (listed by existing on GitHub) · ? = unconfirmed (403). Obs. 2026-06-05.
+
+| Skill (repo) | [GitHub](https://github.com) | [skills.sh](https://skills.sh) | [Composio](https://github.com/ComposioHQ/awesome-claude-skills) | [BehiSecc](https://github.com/BehiSecc/awesome-claude-skills) | [VoltAgent](https://github.com/VoltAgent/awesome-agent-skills) | [SkillsMP](https://skillsmp.com) | [mcpmarket](https://mcpmarket.com/tools/skills) |
+|---|---|---|---|---|---|---|---|
+| [postiz-agent](https://github.com/gitroomhq/postiz-agent) | ✓ | ✓ | ✗ | ✗ | ✓ | ~✓ | ? |
+| [tweetclaw](https://github.com/Xquik-dev/tweetclaw) | ✓ | ✓ | ✗ | ✓ | ✓ | ~✓ | ✓* |
+| [upload-post-skill](https://github.com/Upload-Post/upload-post-skill) | ✓ | ✓ | ✗ | ✓ | ? | ~✓ | ? |
+| […larry-marketing-skill](https://github.com/Upload-Post/upload-post-larry-marketing-skill) | ✓ | ✓ | ✗ | ✗ | ? | ~✓ | ? |
+| [guyaga/…social-media-skill](https://github.com/guyaga/claude-code-social-media-skill) | ✓ | ✓ | ✗ | ✗ | ? | ~✓ | ? |
+| [zernio-api](https://github.com/zernio-dev/zernio-api) | ✓ | ✓ | ✗ | ✗ | ✓ | ~✓ | ? |
+| [post-bridge-hq/agent-mode](https://github.com/post-bridge-hq/agent-mode) | ✓ | ✓ | ✗ | ✗ | ? | ~✓ | ? |
+
+\* mcpmarket carries Xquik's sibling `x-twitter-scraper` skill. **Composio's list** (63k★) only has *generic* "Automation" category entries — none of these six named repos. **BehiSecc's list** explicitly names only **tweetclaw** and **upload-post**. Net: even the curated lists barely cover this category.
+
 **Adjacent — ChatGPT:** real scheduling lives in the new Apps SDK/MCP channel (submissions opened 2025-12-17) via incumbents (SocialPilot AI Scheduler, Glowtify) — not GPT-Store "scheduler GPTs," which are content planners. **Implication:** social scheduling *as a Skill* is unclaimed — first-mover opportunity, but unproven demand this early.
 
 ---
@@ -57,23 +75,23 @@ A real market of *social-scheduling* Skills does **not** yet exist. What's out t
 - Tier 3: dozens of single-author vendor wrappers, almost all **0–3★**.
 
 ### 2.1 Where these MCPs are actually listed (directory & connector presence)
-✓ = listing confirmed via search; **install/usage counts behind these directories were not machine-retrievable (pages 403)**. Obs. 2026-06-05.
+✓ = listing confirmed via search; ✗ = confirmed **not** a native marketplace connector; – = not found in any third-party directory; ? = unconfirmed (page 403). The last two columns count **native, browsable marketplace connectors only** — self-add custom MCP URLs = ✗. Obs. 2026-06-05.
 
-| Tool | mcp.so | Glama | Smithery | PulseMCP | Cursor dir | Docker MCP Catalog |
-|---|---|---|---|---|---|---|
-| Postiz | ✓ | ✓ | ? | ✓ | ✓ | ? |
-| Zernio | ? | ✓ | ? | ? | ? | ? |
-| Post-bridge | – | – | – | – | – | – |
-| Buffer | ? | ? | ? | ✓ (community) | ? | ? |
-| Ayrshare | ? | ✓ (unofficial) | ? | ? | ? | ? |
-| twitter-mcp (EnesCinr) | ? | ✓ | ✓ | ✓ | ? | ✓ |
-| linkedin-mcp (stickerdaniel) | ? | ✓ | ✓ | ? | ? | ✓ |
-| Typefully (community) | ? | ? | ? | ? | ✓ | ? |
-| Upload-Post | ? | ? | ? | ? | ? | ? |
+| Tool | [mcp.so](https://mcp.so) | [Glama](https://glama.ai/mcp) | [Smithery](https://smithery.ai) | [PulseMCP](https://pulsemcp.com) | [Cursor](https://cursor.directory) | [Docker MCP](https://hub.docker.com/mcp) | [Claude conn.](https://claude.com/connectors) | [ChatGPT apps](https://chatgpt.com/apps) |
+|---|---|---|---|---|---|---|---|---|
+| Postiz | ✓ | ✓ | ? | ✓ | ✓ | ? | ✗ | ✗ |
+| Zernio | ? | ✓ | ? | ? | ? | ? | ✗ | ✗ |
+| Post-bridge | – | – | – | – | – | – | ✗ | ✗ |
+| Buffer | ? | ? | ? | ✓ (community) | ? | ? | ✗ | ✗ |
+| Ayrshare | ? | ✓ (unofficial) | ? | ? | ? | ? | ✗ | ✗ |
+| twitter-mcp (EnesCinr) | ? | ✓ | ✓ | ✓ | ? | ✓ | ✗ | ✗ |
+| linkedin-mcp (stickerdaniel) | ? | ✓ | ✓ | ? | ? | ✓ | ✗ | ✗ |
+| Typefully (community) | ? | ? | ? | ? | ✓ | ? | ✗ | ✗ |
+| Upload-Post | ? | ? | ? | ? | ? | ? | ✗ | ✗ |
 
 **Key directory findings:**
 - **Nothing was confirmed in the Official MCP Registry (registry.modelcontextprotocol.io) or GitHub's MCP catalog/Copilot list** — searches returned only the registry homepages, no social-tool hits.
-- **"Listed as a Claude/ChatGPT connector" is mostly vendor-claimed compatibility, not curated-catalog inclusion.** Post-bridge, Zernio, and Upload-Post advertise one-click/custom connectors for Claude + ChatGPT; these are *self-add custom MCP connectors*, not entries in Anthropic's or OpenAI's curated directories.
+- **0 of 9 are native connectors in either curated marketplace.** Anthropic's Connectors Directory (~418 vetted connectors as of 2026-05-28; only Slack is social-adjacent) and OpenAI's ChatGPT Apps Directory (launch partners Spotify/Canva/Figma/Booking/Zillow…) contain none of these schedulers. What vendors call "works with Claude/ChatGPT" is a *self-add custom MCP connector*, not a marketplace listing — Buffer's ChatGPT app is explicitly "on the roadmap." Both marketplaces are <6 months old.
 - **Only the two utility/scraper servers (LinkedIn, Twitter) are in the Docker MCP Catalog** — the SaaS schedulers are not.
 - **"Buffer official MCP" is a near-misnomer in directories:** Buffer's *own* hosted MCP lives at developers.buffer.com, but the directory-listed Buffer MCPs are community-built (e.g. `ahernan2` on PulseMCP/LobeHub).
 - **Postiz is the only scheduler with broad third-party directory presence** (mcp.so, Glama, PulseMCP, Cursor) — again a distribution, not capability, signal.
