@@ -201,7 +201,7 @@ The lead is **a distribution outcome, not a product-quality signal** — a featu
 
 **So:** ChatGPT = biggest prize *if featured*; Claude = best early conversion (high-intent, dev-heavy); MCP registry = the portable substrate to build first. A single MCP server is the "build once, list everywhere" foundation under all three.
 
-**Illustrative traction — modeled scenarios, NOT a forecast.** Per-listing install data is genuinely non-public on every platform, so these are funnel estimates anchored to comparables: today's best *unfeatured* community posting MCP ≈ 300 installs / ~400★, while head-of-directory servers (GitHub/Notion/Figma) dominate the top. A branded, marketed OpusClip listing should clear the long tail:
+**Illustrative traction — modeled scenarios, NOT a forecast.** Per-listing install data is genuinely non-public on every platform, so these are funnel estimates anchored to comparables: the most-adopted *unfeatured* community posting MCPs top out around [~300 Smithery installs](https://smithery.ai/server/@xonack/apex-mcp) ([apex-mcp](https://github.com/xonack/apex-mcp)) and [~400★](https://github.com/EnesCinr/twitter-mcp), while head-of-directory servers ([GitHub](https://github.com/github/github-mcp-server) / [Notion](https://github.com/makenotion/notion-mcp-server) / [Figma](https://www.figma.com/dev-mode/)) dominate the top. A branded, marketed OpusClip listing should clear the long tail:
 
 | Channel (first 6–12 mo) | Conservative | Base (listed + light marketing) | Upside (featured + growth playbook) |
 |---|---|---|---|
