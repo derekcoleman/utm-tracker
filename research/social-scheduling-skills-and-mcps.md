@@ -189,6 +189,30 @@ The lead is **a distribution outcome, not a product-quality signal** — a featu
 
 ---
 
+## 8. Channel weight & traction projections
+
+**Does a ChatGPT app carry as much weight?** By raw reach, *more* — but it's the least *certain* channel.
+
+| Channel | Top-of-funnel reach | Admission | Maturity / certainty |
+|---|---|---|---|
+| **ChatGPT Apps directory** | **~900M WAU** (official, Feb 2026; ~1B est. mid-2026) | Open submission, **gated** OpenAI review | Newest (opened Dec 2025); name-triggered discovery, **monetization unproven**, no public featured-spike data |
+| **Claude connector marketplace** | **~30M MAU**; ~2M+ Claude Code WAU | Open submission, **vetted** admission | 418 connectors / 30 cats, growing fast; smaller but high-intent/dev-heavy — closest to OpusClip's early adopters |
+| **GitHub / Official MCP registry** | Dev-facing; upstream feed to Glama (~21k), PulseMCP (~12k), Smithery (~7k) | Open | Lowest direct reach, but **build-once portability** — one MCP server feeds every surface |
+
+**So:** ChatGPT = biggest prize *if featured*; Claude = best early conversion (high-intent, dev-heavy); MCP registry = the portable substrate to build first. A single MCP server is the "build once, list everywhere" foundation under all three.
+
+**Illustrative traction — modeled scenarios, NOT a forecast.** Per-listing install data is genuinely non-public on every platform, so these are funnel estimates anchored to comparables: today's best *unfeatured* community posting MCP ≈ 300 installs / ~400★, while head-of-directory servers (GitHub/Notion/Figma) dominate the top. A branded, marketed OpusClip listing should clear the long tail:
+
+| Channel (first 6–12 mo) | Conservative | Base (listed + light marketing) | Upside (featured + growth playbook) |
+|---|---|---|---|
+| MCP registry + aggregators | hundreds of installs | 1–5k installs | Postiz-style 10k★+ if the playbook lands |
+| Claude connector | ~1k connects | 5–20k | 50k+ if featured |
+| ChatGPT app | low thousands | 10–50k | 100k–1M+ (high variance, unproven) |
+
+Assumptions: niche social-posting penetration of each base, modest connect-through, OpusClip brand + a Postiz-style launch (GitHub Trending → Product Hunt → awesome-lists). **Every figure is an estimate; ranges swing an order of magnitude on whether you get *featured*** — which is the single biggest lever and the reason directory placement (not just shipping a repo) is the play.
+
+---
+
 ## Confidence & data-quality notes
 
 - **High (verified):** all GitHub star/fork counts (GitHub API); Mixpost Docker pulls (200,424); Sprout revenue (SEC); Post-bridge 30-day Stripe revenue (TrustMRR).
